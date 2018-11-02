@@ -33,12 +33,15 @@ public class LoginUI : MonoBehaviour {
         string pPassword = mPassawordField.text;
         string pLogin = mLoginField.text;
 
-        GameSparksUtility.ActionLogin = ManagerUI.Instance.OnSucessLogin;
-
-        //to do
+        GameSparksUtility.ActionLogin = delegate (AuthenticationResponse pAuthResponse)
+        {
+            if (!pAuthResponse.HasErrors)
+                ManagerUI.Instance.OnSucessLogin(pAuthResponse);
+            else
+                ManagerUI.Instance.OnErrorLogin(pAuthResponse);
+        };
 
         GameSparksUtility.LoginUser(pLogin, pPassword, GameSparksUtility.ActionLogin);
-
     }
 
     public void RegisterScreen()

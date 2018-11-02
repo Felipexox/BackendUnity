@@ -7,7 +7,7 @@ using GameSparks.Api.Responses;
 using System;
 public class GameSparksUtility {
 
-    public static void RegisterUser(string pDisplayName, string pLoginName, string pPassword, Action<RegistrationResponse> sucessEvent)
+    public static void RegisterUser(string pDisplayName, string pLoginName, string pPassword, Action<RegistrationResponse> pCallBack)
     {
         // register player by game spark
         new RegistrationRequest()
@@ -15,27 +15,35 @@ public class GameSparksUtility {
            .SetPassword(pPassword)
            .SetDisplayName(pDisplayName).Send((response) =>
            {
-                sucessEvent(response);
+                pCallBack(response);
            });
     }
 
-    public static void LoginUser(string pLoginName, string pPassword, Action<AuthenticationResponse> sucessEvent)
+    public static void LoginUser(string pLoginName, string pPassword, Action<AuthenticationResponse> pCallBack)
     {
         //login player by Game Spark
         new AuthenticationRequest()
             .SetUserName(pLoginName)
             .SetPassword(pPassword).Send((response) =>
             {
-                sucessEvent(response);
+                pCallBack(response);
             });
     }
 
-    public static void GetInfoPlayer(ref string pDisplayName, ref string teste, Action<AccountDetailsResponse> sucessEvent)
+    public static void LogoutUser(Action<EndSessionResponse> pCallBack)
+    {
+        new EndSessionRequest()
+            .Send((pLogoutResponse) => {
+                pCallBack(pLogoutResponse);
+            });
+    }
+
+    public static void GetInfoPlayer(ref string pDisplayName, ref string teste, Action<AccountDetailsResponse> pCallBack)
     {
         // Get Account info
         new AccountDetailsRequest().Send((response) =>
         {
-            sucessEvent(response);
+            pCallBack(response);
         });
     }
 
@@ -44,6 +52,8 @@ public class GameSparksUtility {
     public static Action<AuthenticationResponse> ActionLogin;
 
     public static Action<RegistrationResponse> ActionRegister;
+
+    public static Action<EndSessionResponse> ActionLogout;
 
     #endregion
 

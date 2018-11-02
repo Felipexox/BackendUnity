@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameSparks.Api.Responses;
 public class RegisterUI : MonoBehaviour {
     [SerializeField]
     private InputField mDisplayNameField;
@@ -35,12 +36,16 @@ public class RegisterUI : MonoBehaviour {
         string pLogin = mLoginField.text;
         string pPassword = mPasswordField.text;
 
-        GameSparksUtility.ActionRegister += ManagerUI.Instance.OnSucessRegister;
-
-        // to do
+        GameSparksUtility.ActionRegister = delegate( RegistrationResponse registerResponse) {
+            if (!registerResponse.HasErrors)
+                ManagerUI.Instance.OnSucessRegister(registerResponse);
+            else
+                ManagerUI.Instance.OnErrorRegister(registerResponse);
+        };
 
         GameSparksUtility.RegisterUser(pDisplayName, pLogin, pPassword, GameSparksUtility.ActionRegister);
     }
+
     public void SetLoginScreen()
     {
         ManagerUI.Instance.SetScreen(ManagerUI.Screen.LOGIN);

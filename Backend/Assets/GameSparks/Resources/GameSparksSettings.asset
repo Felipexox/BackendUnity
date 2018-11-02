@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sdkVersion: 
   apiKey: K371791prDbZ
-  credential: caS8K06hElVwJs0ML6UYNMwhM5uh0rVp
+  credential: device
   apiSecret: caS8K06hElVwJs0ML6UYNMwhM5uh0rVp
   previewBuild: 1
   debugBuild: 0
