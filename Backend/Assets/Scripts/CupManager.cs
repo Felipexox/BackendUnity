@@ -1,13 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameSparks.Api.Responses;
 
 public class CupManager : MonoBehaviour {
+
+    [SerializeField]
+    private static CupManager instance;
+
     [SerializeField]
     private List<GameObject> m_pCups;
 
     [SerializeField]
     private GameObject m_pBall;
+
+    public Score score = new Score();
 
     private int currentIndexCupHidden;
 
@@ -29,7 +36,11 @@ public class CupManager : MonoBehaviour {
 
     private bool isBallToMovement = false;
 
-    private void Start()
+    private void Awake()
+    {
+        Instance = this;
+    }
+    public void StartGamePlay()
     {
         currentIndexCupHidden = 1;
         ShowAllCups();
@@ -72,8 +83,31 @@ public class CupManager : MonoBehaviour {
         int index = -1;
         yield return new WaitUntil(() => ( index = GetIndexByClick()) != -1);
 
+        if(index != currentIndexCupHidden)
+        {
+            if(PlayerManager.Instance.PlayerScore < score.MScore)
+            {
+                //Save PlayerFeb and server
+                PlayerManager.Instance.SavePlayerScore(score.MScore);
+            }
+        }
+
         ShowCup(index);
         yield return new WaitForSeconds(timetToShowCup + timeToHiddenCup);
+        // On end game
+        if(index != currentIndexCupHidden)
+        {
+       
+            ManagerUI.Instance.SetScreen(ManagerUI.Screen.MENU);
+            //Call Lose UI TO DO
+
+            score.ResetScore();
+
+            yield break;
+        }
+
+        score.AddPoint(1);
+
         if (timeToExchange > 0.25f)
         {
             timeToExchange -= 0.1f;
@@ -229,7 +263,18 @@ public class CupManager : MonoBehaviour {
         }
     }
 
+    public static CupManager Instance
+    {
+        get
+        {
+            return instance;
+        }
 
+        set
+        {
+            instance = value;
+        }
+    }
 
     public int GetIndexByClick()
     {

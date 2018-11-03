@@ -11,12 +11,22 @@ public class MenuUI : MonoBehaviour, IScreen {
     private Button mStartButton;
     [SerializeField]
     private Button mLogoutButton;
+    [SerializeField]
+    private LeaderBoardUI mLeaderBoardUI;
 
     public void INIT()
     {
+        mLeaderBoardUI.INIT();
+
+        //Info
+        mDisplayPlayerInfo.text = "Bem vindo, " + PlayerManager.Instance.DisplayName + ".";
+
+        //Buttons
         mLogoutButton.onClick = new Button.ButtonClickedEvent();
+        mStartButton.onClick = new Button.ButtonClickedEvent();
 
         mLogoutButton.onClick.AddListener(Logout);
+        mStartButton.onClick.AddListener(StartGamePlay);
     }
 
     public void Logout()
@@ -33,6 +43,6 @@ public class MenuUI : MonoBehaviour, IScreen {
 
     public void StartGamePlay()
     {
-        //to do
+        ManagerUI.Instance.SetScreen(ManagerUI.Screen.GAMEPLAY);
     }
 }

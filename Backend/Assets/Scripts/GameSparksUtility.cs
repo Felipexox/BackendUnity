@@ -38,6 +38,22 @@ public class GameSparksUtility {
             });
     }
 
+    public static void PostScoreEvent(string pEventShortCode, int pScore, Action<LogEventResponse> pCallBack)
+    {
+        new LogEventRequest().SetEventKey(pEventShortCode).SetEventAttribute("SCORE", pScore).Send((pPostScore) =>
+        {
+            pCallBack(pPostScore);
+        });
+    }
+
+    public static void GetLeaderBoard(string pLeaderBoardShortCode, Action<LeaderboardDataResponse> pCallBack)
+    {
+        new LeaderboardDataRequest().SetLeaderboardShortCode(pLeaderBoardShortCode).SetEntryCount(10).Send((pLeaderBoardDataResponse) =>
+        {
+            pCallBack(pLeaderBoardDataResponse);
+        });
+    }
+
     public static void GetInfoPlayer(ref string pDisplayName, ref string teste, Action<AccountDetailsResponse> pCallBack)
     {
         // Get Account info
@@ -54,6 +70,10 @@ public class GameSparksUtility {
     public static Action<RegistrationResponse> ActionRegister;
 
     public static Action<EndSessionResponse> ActionLogout;
+
+    public static Action<LogEventResponse> ActionPostScore;
+
+    public static Action<LeaderboardDataResponse> ActionLeaderBoard;
 
     #endregion
 

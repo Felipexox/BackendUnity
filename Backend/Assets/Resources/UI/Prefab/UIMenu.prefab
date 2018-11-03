@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224137590640120476}
   - component: {fileID: 222749648060052920}
+  - component: {fileID: 114811688148834684}
   - component: {fileID: 114460888675966792}
   m_Layer: 5
   m_Name: LeaderBoard
@@ -711,6 +712,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Bem vindo: Felipe'
+--- !u!114 &114811688148834684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1045432255354574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0c426449bbb9a43a7ba60b92721f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mPrefabLeaderBoardItemUI: {fileID: 1473788806002870, guid: df43e18547940884da54a4ce70a376e7,
+    type: 2}
+  mRoot: {fileID: 224618796514645574}
 --- !u!114 &114969248298310922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -725,6 +740,7 @@ MonoBehaviour:
   mDisplayPlayerInfo: {fileID: 114767414483244574}
   mStartButton: {fileID: 114043853002990214}
   mLogoutButton: {fileID: 114291350929559298}
+  mLeaderBoardUI: {fileID: 114811688148834684}
 --- !u!222 &222013698313157524
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -906,7 +922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0988927, y: 0.34457105}
   m_AnchorMax: {x: 0.39017558, y: 0.4857057}
-  m_AnchoredPosition: {x: 0, y: -2.0244694}
+  m_AnchoredPosition: {x: 0, y: -2.024475}
   m_SizeDelta: {x: 0, y: -4.048937}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224421268685630282
@@ -942,7 +958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000033723554}
+  m_AnchoredPosition: {x: 0, y: 0.0000262754}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224776843887862792
@@ -961,7 +977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.098892644, y: 0.13900381}
   m_AnchorMax: {x: 0.39017552, y: 0.28013846}
-  m_AnchoredPosition: {x: -0.000030517578, y: -2.0244598}
+  m_AnchoredPosition: {x: -0.000030517578, y: -2.0245361}
   m_SizeDelta: {x: 0, y: -4.048935}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224858019732153434

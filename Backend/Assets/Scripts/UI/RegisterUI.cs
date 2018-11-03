@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameSparks.Api.Responses;
-public class RegisterUI : MonoBehaviour {
+public class RegisterUI : MonoBehaviour, IScreen {
     [SerializeField]
     private InputField mDisplayNameField;
     [SerializeField]
@@ -15,13 +15,10 @@ public class RegisterUI : MonoBehaviour {
     [SerializeField]
     private Button mLoginLink;
 
-    private void Awake()
+    public void INIT()
     {
-        INIT();
-    }
+        ClearDataFields();
 
-    void INIT()
-    {
         mRegisterButton.onClick = new Button.ButtonClickedEvent();
         mLoginLink.onClick = new Button.ButtonClickedEvent();
 
@@ -51,4 +48,10 @@ public class RegisterUI : MonoBehaviour {
         ManagerUI.Instance.SetScreen(ManagerUI.Screen.LOGIN);
     }
 
+    void ClearDataFields()
+    {
+        mDisplayNameField.text = "";
+        mPasswordField.text = "";
+        mLoginField.text = "";
+    }
 }

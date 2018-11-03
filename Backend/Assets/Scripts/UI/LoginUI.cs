@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using GameSparks.Api.Responses;
-public class LoginUI : MonoBehaviour {
+public class LoginUI : MonoBehaviour, IScreen {
     [SerializeField]
-    private InputField mPassawordField;
+    private InputField mPasswordField;
     [SerializeField]
     private InputField mLoginField;
     [SerializeField]
@@ -14,13 +14,10 @@ public class LoginUI : MonoBehaviour {
     [SerializeField]
     private Button mRegisterLink;
 
-    private void Awake()
+    public void INIT()
     {
-        INIT();
-    }
+        ClearDataFields();
 
-    void INIT()
-    {
         mLoginButton.onClick = new Button.ButtonClickedEvent();
         mRegisterLink.onClick = new Button.ButtonClickedEvent();
 
@@ -30,7 +27,7 @@ public class LoginUI : MonoBehaviour {
 
     public void Login()
     {
-        string pPassword = mPassawordField.text;
+        string pPassword = mPasswordField.text;
         string pLogin = mLoginField.text;
 
         GameSparksUtility.ActionLogin = delegate (AuthenticationResponse pAuthResponse)
@@ -49,4 +46,9 @@ public class LoginUI : MonoBehaviour {
         ManagerUI.Instance.SetScreen(ManagerUI.Screen.REGISTER);
     }
 
+    void ClearDataFields()
+    {
+        mPasswordField.text = "";
+        mLoginField.text = "";
+    }
 }
