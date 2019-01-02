@@ -62,6 +62,42 @@ public class GameSparksUtility {
             pCallBack(response);
         });
     }
+  
+    public static void CreateMatchByName(string[] playersIDs)
+    {
+        GSRequestData data = new GSRequestData();
+
+        data.Add("PlayersIDs", playersIDs);
+
+        new LogEventRequest()
+            .SetEventKey("CREATE_MATCH")
+            .SetEventAttribute("Players", data)
+            .Send((response) =>
+            {
+                if (response.HasErrors)
+                    Debug.LogError("Error to create match: " + response.Errors);
+            });
+    }
+
+    public static void ConnectToLobby()
+    {
+       
+        Debug.Log("Send Match");
+        new MatchmakingRequest().SetMatchShortCode("MULT_MATCH")
+            .SetSkill(0)
+            .Send((response) =>
+            {
+                if (!response.HasErrors)
+                {
+                    Debug.Log("Match Response: ");
+                    Debug.Log(response);
+                }
+                else
+                {
+                    Debug.LogError("Match Response Error: " + response.Errors);
+                }
+            });
+    }
 
     #region Actions  
 

@@ -53,6 +53,6 @@ public class LeaderBoardUI : MonoBehaviour, IScreen
     void SetLeaderBoardItemInfo(GameObject pLeaderBoardItemObject, string pPlayerDisplayName, string pScore, int pLeaderBoardRank)
     {
         Text pTextUI = pLeaderBoardItemObject.GetComponent<Text>();
-        pTextUI.text = pLeaderBoardRank + " - " + pPlayerDisplayName + " - " + pScore;
+        pTextUI.text = pLeaderBoardRank + "º - " + pPlayerDisplayName + " - " + pScore +" pts";
     }
 }

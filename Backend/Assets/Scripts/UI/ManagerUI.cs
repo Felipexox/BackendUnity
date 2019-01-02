@@ -9,7 +9,8 @@ public class ManagerUI : MonoBehaviour {
         LOGIN,
         REGISTER,
         MENU,
-        GAMEPLAY
+        GAMEPLAY,
+        CHAT
     }
 
     [SerializeField]
@@ -20,6 +21,8 @@ public class ManagerUI : MonoBehaviour {
     private GameObject mMenuGameObjectUI;
     [SerializeField]
     private GameObject mGamePlayGameObjectUI;
+    [SerializeField]
+    private GameObject mChatObjectUI;
 
 
     private GameObject mCurrentUI;
@@ -52,6 +55,9 @@ public class ManagerUI : MonoBehaviour {
             case Screen.GAMEPLAY:
                 EnableScreen(mGamePlayGameObjectUI);
                 break;
+            case Screen.CHAT:
+                EnableScreen(mChatObjectUI);
+                break;
     
         }
     }
@@ -70,8 +76,9 @@ public class ManagerUI : MonoBehaviour {
     public void OnSucessLogin(AuthenticationResponse pAuthResponse)
     {
         //Loading Menu Screen
-        PlayerManager.Instance.SavePlayerDisplayName(pAuthResponse.DisplayName);
-        SetScreen(Screen.MENU);
+        //  PlayerManager.Instance.SavePlayerDisplayName(pAuthResponse.DisplayName);
+        SetScreen(Screen.CHAT);
+        Debug.Log("Login Sucessful");
     }
     //Login Error
     public void OnErrorLogin(AuthenticationResponse pAuthResponse)

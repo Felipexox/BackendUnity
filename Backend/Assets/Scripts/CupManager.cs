@@ -14,6 +14,9 @@ public class CupManager : MonoBehaviour {
     [SerializeField]
     private GameObject m_pBall;
 
+    [SerializeField]
+    private Vector3[] cupsStartPosition = new Vector3[3];
+
     public Score score = new Score();
 
     private int currentIndexCupHidden;
@@ -40,8 +43,15 @@ public class CupManager : MonoBehaviour {
     {
         Instance = this;
     }
+    private void Start()
+    {
+        SavaCupsPosition();
+    }
     public void StartGamePlay()
     {
+        shuffleCount = 3;
+        timeToExchange = 1;
+        ResetCupPosition();
         currentIndexCupHidden = 1;
         ShowAllCups();
     }
@@ -54,6 +64,22 @@ public class CupManager : MonoBehaviour {
         if (!isBallToMovement)
         {
             m_pBall.transform.position = position;
+        }
+    }
+
+    private void SavaCupsPosition()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            cupsStartPosition[i] = m_pCups[i].transform.position;
+        }
+    }
+
+    public void ResetCupPosition()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            m_pCups[i].transform.position = cupsStartPosition[i];
         }
     }
 
@@ -72,7 +98,7 @@ public class CupManager : MonoBehaviour {
             } while (index1 == index2);
 
             ExchangeCups(m_pCups[index1], m_pCups[index2]);
-            yield return new WaitForSeconds(timeToExchange);
+            yield return new WaitForSeconds(timeToExchange+0.15f);
         }
         m_pBall.SetActive(true);
         yield return ChoiceCup();
@@ -112,6 +138,7 @@ public class CupManager : MonoBehaviour {
         {
             timeToExchange -= 0.1f;
         }
+
         shuffleCount++;
 
         ShowAllCups();
